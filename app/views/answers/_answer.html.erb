@@ -1,0 +1,12 @@
+<li id="answer-<%= answer.id %>">
+	<dt><%= answer.description %></dt>
+	<dd>by <%= link_to answer.user.name, answer.user %> 
+		posted on <%= answer.created_at %></dd>
+	
+	<div class="comments">
+		<%= render answer.comments %>
+	</div>
+	
+	<%= link_to "Add a comment", new_comment_path, class: "new_comment" %>
+	<%= render 'comments/addcomment', :type => answer %>
+</li>

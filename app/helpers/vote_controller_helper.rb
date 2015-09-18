@@ -1,0 +1,2 @@
+module VoteControllerHelper
+end

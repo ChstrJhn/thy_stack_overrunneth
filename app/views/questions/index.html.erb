@@ -1,0 +1,14 @@
+<h1>Top Questions</h1>
+
+<% unless @questions.nil? %>
+  <table>
+    <% @questions.each do |question|%>
+      <tr>
+      	<td>Votes: <%=question.votes.size%></td>
+      	<td>Answers:<%=question.answers.size%></td>
+        <td><%=link_to "#{question.title}", question%></td>
+        <td>asked by <%=question.user.name%></td>
+      </tr>
+    <%end%>
+</table>
+<%end%>

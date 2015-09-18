@@ -1,0 +1,21 @@
+<div class="center jumbotron">
+<p>They see me asking questions, they art prejudiced.</p>
+<%= link_to "Dost Thou Even Stackth?!", signup_path, class: "btn btn-lg btn-primary" %>
+
+<% unless @questions.nil? %>
+<h2>Trending Questions</h2>
+<div class="question-table">
+  <table>
+    <% @questions.each do |question|%>
+      <tr>
+      	<td>Views: <%=question.views%></td>
+      	<td>Votes: <%=question.vote_count%></td>
+      	<td>Answers: <%=question.total_answers%></td>
+        <td><%=link_to "#{question.title}", question%></td>
+        <td>asked by <%= link_to "#{question.user.name}", question.user%></td>
+      </tr>
+    <%end%>
+</table>
+<%end%>
+</div>
+</div>

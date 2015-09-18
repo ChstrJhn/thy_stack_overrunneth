@@ -1,0 +1,30 @@
+<h1><%=@question.title%></h1>
+<p>Asked by <%=@user.name%></p>
+<button type="button">Vote up</button>
+<button type="button">Vote down</button>
+<p><%=@question.content%></p>
+
+<h4><%=@question.total_answers%> Answer(s)</h4>
+<% unless @question.answers.empty?%>
+  <table>
+  	<tr>
+    <% @question.answers.each do |answer|%>
+    <td>'<%=answer.text%>'</td>
+    <td>posted by <%=answer.user.name%></td>
+    <tr>
+    <%end%>
+  </table>
+<%end%>
+
+<%= form_for(@answer) do |f| %>
+ <div class="field">
+    <b><%= f.label :text, "Your answer" %></b><br>
+    <%= f.text_area :text %>
+    <%= f.hidden_field :question_id, :value => @question.id %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit Answer", class: "btn btn-primary" %>
+  </div>
+<%end%>
+
+
