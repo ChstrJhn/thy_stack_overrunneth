@@ -2,14 +2,14 @@ class Question < ActiveRecord::Base
 	belongs_to :user
 	has_many :answers
 	has_many :votes, as: :votable
+  has_many :comments, as: :commentable
 	validates :title, :content, presence: true
 
   def add_user_vote(user)
-    if self.votes.include?(user)
-      return false
-    else
+    unless ( !!self.votes.find_by(user_id: user) == true )
       self.votes.create(user: user)
-      return true
+    else
+      return false
     end
   end
 
@@ -18,7 +18,12 @@ class Question < ActiveRecord::Base
   end
 
   def vote_count
-  	self.votes.size
+  	size = self.votes.sum(:up) - self.votes.sum(:down)
+  	size
+  end
+
+  def best_answer
+    self.answers.find_by(best_answer: true)
   end
 
 end

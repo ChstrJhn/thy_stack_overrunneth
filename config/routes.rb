@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :questions
   resources :answers
   resources :votes
+  resources :comments
   root 'static_pages#home'
   get 'signup' => 'users#new'
 
@@ -14,7 +15,22 @@ Rails.application.routes.draw do
   #questions
   get 'questions' => 'questions#index'
   get 'new_questions' => 'questions#new'
+  get 'question' => 'question#show'
   # post 'new_questions' => 'questions#create'
+
+  #votes
+  get 'upvote' => 'questions#upvote'
+  get 'downvote' => 'questions#downvote'
+
+  #answers
+  get 'update_answer' => 'answer#update'
+
+  #comments
+  get 'new_comment' => 'comments#new'
+  # get 'comments' => 'comments#index'
+  # post 'comments' => 'comments#create'
+  # get 'comment' => 'comments#show'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

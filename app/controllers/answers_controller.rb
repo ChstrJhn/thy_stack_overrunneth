@@ -9,4 +9,12 @@ class AnswersController < ApplicationController
 		redirect_to @question
 	end
 
+	def update
+	  @question = Question.find(session[:question_id])
+	  answer = Answer.find(params[:answer][:posted_answer_id])
+      answer.update(best_answer: true)
+
+      redirect_to @question
+	end
+
 end

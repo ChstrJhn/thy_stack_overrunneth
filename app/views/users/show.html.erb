@@ -9,7 +9,19 @@
         </section>
     </aside>
 </div>
+
 <p>Got a question? <%= link_to 'Ask now!', new_question_path %></p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', root_url %>
+<% unless @user.questions.nil? %>
+<h2>Your recent questions</h2>
+  <table>
+  	<tr>
+	<%@user.questions.each do |question|%>
+  <td>Views: <%= question.views %></td>
+  <td>Votes: <%= question.vote_count %></td>
+  <td>Answers: <%= question.total_answers %></td>
+	<td><%= link_to question.title , question_path(question) %><td>
+	<tr>
+ </table>
+ <%end%>
+ <%end%>
